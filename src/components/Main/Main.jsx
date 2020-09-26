@@ -9,8 +9,8 @@ const Main = (props) => {
   return <main className={ styles.main }>
       <Route exact path='/' render={ () => <Page1 /> }/>
       <Route exact path='/page1' render={ () => <Page1 /> }/>
-      <Route exact path='/page2' render={ () => <Page2 /> }/>
-      <Route exact path='/page3' render={ () => <Page3 /> }/>
+      <Route exact path='/page2/:message?' render={ () => <Page2 /> }/>
+      <Route exact path='/page3/:message?' render={ () => <Page3 /> }/>
     </main>;
 }
 
