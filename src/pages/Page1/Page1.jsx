@@ -1,5 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
+import store from '../../redux/redux-store';
+import { changeHelloTextCreator } from '../../redux/helloReducer';
+import { setHelloValueCreator } from '../../redux/helloValueReducer';
 
 
 class Page1 extends React.Component {
@@ -18,6 +21,10 @@ class Page1 extends React.Component {
             <input type="text" id="message" ref={this.messageRef} />
             <br/>
             <button id="goBtn" onClick={this.go.bind(this)}>go</button>
+            <hr/>
+            <textarea id="hello" placeholder="hello" onChange={this.handleChange} value={store.getState().helloReducer.newHelloText}></textarea>
+            <br/>
+            <button id="setBtn" onClick={this.set.bind(this)}>set</button>
         </div>;
     }
 
@@ -27,6 +34,16 @@ class Page1 extends React.Component {
         if(id && id > 1 && message) {
             this.props.history.push(`/page${id}/${message}`)
         }
+    }
+
+    handleChange = (e) => {
+        console.log(e.target.value)
+        store.dispatch(changeHelloTextCreator(e.target.value));
+    }
+
+    set() {
+        const helloValue = store.getState().helloReducer.newHelloText;
+        store.dispatch(setHelloValueCreator(helloValue));
     }
 }
 
